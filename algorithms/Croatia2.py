@@ -6,3 +6,4 @@ class Main:
         str = str.replace(i,"*")
         print(str)
     print(len(str))
+

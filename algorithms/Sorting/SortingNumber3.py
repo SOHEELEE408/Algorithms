@@ -13,3 +13,11 @@ class Main:
         if nums[i] != 0:
             for _ in range(nums[i]):
                 print(i)
+
+# if __name__ == '__main__' :
+
+"""
+    sorted ,sort 
+    안정정렬 - 같은 값일 경우는 순서가 바뀌지 않도록 하기, 파이썬은 알아서 해줌
+    round() 반올림 함수 사사오익 짝수로 맞춰줘야 한다. 
+"""

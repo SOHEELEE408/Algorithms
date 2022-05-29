@@ -12,3 +12,4 @@ class Main:
             total.append(temp)
 
     print(total[len(total)-1])
+
