@@ -18,13 +18,16 @@ def isPrime(number):
 
 
 def dfs(number):
-    if len(str(number)) == N and isPrime(number):
+    if len(str(number)) == N:
         result.append(number)
         return
 
-    if(isPrime(number)):
-        for _ in range(1, 10):
-            dfs(int(str(number)+str(_)))
+    for _ in range(1, 10):
+        newNum = int(str(number)+str(_))
+        if(isPrime(newNum)):
+            dfs(newNum)
+
+
 
 primes = [2, 3, 5, 7]
 
