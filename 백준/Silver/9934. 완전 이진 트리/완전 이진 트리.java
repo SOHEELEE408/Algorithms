@@ -1,78 +1,45 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-	int depth;
-	String[] inputs;
 
-	public Main(int depth, String[] inputs) {
-		this.depth = depth;
-		this.inputs = inputs;
+	static int K;
+	static int[] arr;
+	static StringBuffer[] ans;
+
+	public static void main(String[] args) throws Exception {
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+		K = Integer.parseInt(br.readLine());
+		arr = new int[(int) Math.pow(2, K) - 1];
+
+		String[] input = br.readLine().split(" ");
+		for (int i = 0; i < arr.length; i++)
+			arr[i] = Integer.parseInt(input[i]);
+
+		ans = new StringBuffer[K];
+		for (int i = 0; i < K; i++)
+			ans[i] = new StringBuffer();
+
+		solve(0, arr.length - 1, 0);
+
+		for (int i = 0; i < K; i++)
+			bw.write(ans[i].toString() + "\n");
+		bw.flush();
+
 	}
 
-	public void result(Node root) {
-		Queue<Node> nodes = new LinkedList<>();
-		nodes.offer(root);
-		int depth = root.depth;
+	public static void solve(int s, int e, int floor) {
 
-		while (!nodes.isEmpty()) {
-			Node node = nodes.poll();
-			if (node.depth != depth) {
-				System.out.println();
-				depth = node.depth;
-			}
-			System.out.print(node.value + " ");
-			if (node.left != null) {
-				nodes.offer(node.left);
-			}
-			if (node.right != null) {
-				nodes.offer(node.right);
-			}
-		}
+		if (floor == K)
+			return;
+
+		int m = (s + e) / 2;
+		ans[floor].append(arr[m] + " ");
+
+		solve(s, m - 1, floor + 1);
+		solve(m + 1, e, floor + 1);
 	}
 
-	public Node makeNode(int start, int length, int depth) {
-		if (length < 1) {
-			return null;
-		}
-		int middle = (length - 1) / 2;
-		int value = Integer.valueOf(inputs[start + middle]);
-		Node root = new Node(value, depth);
-		root.left = makeNode(start, middle, depth - 1);
-		root.right = makeNode(start + middle + 1, middle, depth - 1);
-
-		return root;
-	}
-
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int depth = Integer.valueOf(sc.nextLine());
-		String[] inputs = sc.nextLine().split(" ");
-
-		Main main = new Main(depth, inputs);
-		Node result = main.makeNode(0, inputs.length, depth);
-		main.result(result);
-	}
-
-	class Node {
-		int value;
-		Node left;
-		Node right;
-
-		int depth;
-
-		Node(int value, int depth) {
-			this.value = value;
-			this.left = null;
-			this.right = null;
-			this.depth = depth;
-		}
-
-		public Node(int value, Node left, Node right) {
-			this.value = value;
-			this.left = left;
-			this.right = right;
-		}
-	}
 }
