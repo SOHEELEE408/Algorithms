@@ -1,8 +1,10 @@
 import java.util.*;
 /**
-1. 주어진 배열을 오름차순 정렬한다. [0, 1, 3, 5, 6]
+1. 주어진 배열을 내림차순 정렬한다. [0, 1, 3, 5, 6]
 2. 차례대로 돌면서 조건을 만족하는 지 체크한다.
-    - h편 이상이다. > citations.length - i(자기 자신의 인덱스)
+    - i(현재 인덱스) + 1 = h >> h편의 논문
+    - h번 이상 인용 >> citations[i] >= i(현재 인덱스) + 1
+    - 이 중에서 큰 값이 답
 */
 class Solution {
     public int solution(int[] citations) {
